@@ -1,0 +1,204 @@
+<title>MOHI Food & Wine 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap">
+<style>
+/* Layout: one calm column. Wordmark header, three parts of the day (VIP Hour set apart in bronze), then the floor plan. */
+:root {
+  --bg: #faf8f3;
+  --surface: #ffffff;
+  --ink: #1a1712;
+  --muted: #6a6256;
+  --line: #e3dccd;
+  --bronze: #8a6624;
+  --gold: #c19a3b;
+  --olive: #4f5b3a;
+  --vip-bg: #1a1712;
+  --vip-ink: #f6efdf;
+  --vip-muted: #cdbf9f;
+  --font-display: "Cormorant Garamond", "Times New Roman", Georgia, serif;
+  --font-body: "Jost", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14120e; --surface: #1d1a14; --ink: #f4efe3; --muted: #aaa08d; --line: #343025;
+    --bronze: #d6b165; --gold: #d6b165; --olive: #a3b17f;
+    --vip-bg: #2a2417; --vip-ink: #f6efdf; --vip-muted: #cdbf9f;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14120e; --surface: #1d1a14; --ink: #f4efe3; --muted: #aaa08d; --line: #343025;
+  --bronze: #d6b165; --gold: #d6b165; --olive: #a3b17f;
+  --vip-bg: #2a2417; --vip-ink: #f6efdf; --vip-muted: #cdbf9f;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 17px; line-height: 1.55; padding-inline: 16px; padding-block: 0 64px; }
+.wrap { max-width: 760px; margin-inline: auto; display: flex; flex-direction: column; gap: 56px; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+/* header */
+header { padding-top: 56px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px; }
+.mark { font-family: var(--font-display); font-weight: 500; line-height: 1; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.mark .m { font-size: clamp(64px, 18vw, 112px); letter-spacing: .12em; padding-left: .12em; }
+.mark .fw { font-size: clamp(20px, 5.5vw, 30px); letter-spacing: .32em; padding-left: .32em; }
+.mark .fw i { color: var(--gold); letter-spacing: 0; padding-inline: .3em; font-weight: 500; }
+.mark .yr { font-size: 18px; letter-spacing: .5em; padding-left: .5em; color: var(--bronze); }
+.when { font-size: 14px; letter-spacing: .18em; text-transform: uppercase; font-weight: 500; color: var(--bronze); display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; }
+.intro { max-width: 34em; margin: 0; color: var(--muted); font-size: 18px; text-wrap: balance; }
+.cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.btn { display: inline-flex; align-items: center; padding: 13px 24px; border: 1px solid var(--ink); background: var(--ink); color: var(--bg); text-decoration: none; font: 500 13px/1 var(--font-body); letter-spacing: .16em; text-transform: uppercase; cursor: pointer; }
+.btn.alt { background: transparent; color: var(--ink); }
+.btn:hover { border-color: var(--gold); box-shadow: inset 0 -3px 0 var(--gold); }
+
+/* tabs */
+.tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 28px; border-bottom: 1px solid var(--line); width: 100%; }
+.tab { background: none; border: 0; border-bottom: 3px solid transparent; padding: 12px 2px; margin-bottom: -1px; color: var(--muted); font: 500 14px/1 var(--font-body); letter-spacing: .16em; text-transform: uppercase; cursor: pointer; }
+.tab:hover { color: var(--ink); }
+.tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--gold); }
+.guide-body { display: flex; justify-content: center; padding-block: 24px; }
+
+/* day */
+h2 { font-family: var(--font-display); font-weight: 500; font-size: clamp(34px, 7vw, 46px); line-height: 1.05; margin: 0; }
+.head { display: flex; flex-direction: column; gap: 6px; margin-bottom: 28px; }
+.head p { margin: 0; color: var(--muted); }
+.day { display: flex; flex-direction: column; gap: 28px; }
+.part { border-top: 2px solid var(--ink); padding-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+.part-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 16px; }
+.part h3 { font-family: var(--font-display); font-weight: 600; font-size: 28px; line-height: 1.1; margin: 0; }
+.part .where { font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--bronze); font-weight: 500; }
+.part ul { list-style: none; margin: 0; padding: 0; }
+.part li { display: grid; grid-template-columns: 92px 1fr; gap: 0 16px; padding: 12px 0; border-top: 1px solid var(--line); }
+.part li:first-child { border-top: 0; }
+.t { font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.what { min-width: 0; }
+.what small { display: block; color: var(--muted); font-size: 15px; }
+
+/* VIP Hour set apart */
+.part.vip { background: var(--vip-bg); color: var(--vip-ink); border-top: 2px solid var(--gold); padding: 22px 22px 14px; margin-block: 4px; }
+.part.vip .where { color: var(--gold); }
+.part.vip li { border-top-color: rgba(205,191,159,.25); }
+.part.vip small, .part.vip .lede { color: var(--vip-muted); }
+.part.vip .lede { margin: 0 0 6px; }
+.part.vip li.star .what { font-family: var(--font-display); font-size: 26px; line-height: 1.15; font-weight: 600; }
+.part.vip li.star .t { color: var(--gold); }
+
+/* floor plan */
+.plan { background: var(--surface); border: 1px solid var(--line); overflow: auto; max-height: 82vh; }
+.plan img { display: block; width: 100%; height: auto; max-width: none; }
+.plan.zoom img { width: 220%; }
+.legend { color: var(--muted); font-size: 15px; margin: 14px 0 0; }
+.plan-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px; margin-bottom: 20px; }
+footer { text-align: center; color: var(--muted); font-family: var(--font-display); font-size: 22px; font-style: italic; border-top: 1px solid var(--line); padding-top: 32px; text-wrap: balance; }
+
+@media (max-width: 480px) {
+  .part li { grid-template-columns: 1fr; gap: 2px; }
+  .plan.zoom img { width: 320%; }
+  .part.vip { padding-inline: 16px; }
+}
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="mark" role="img" aria-label="MOHI Food and Wine 2026">
+      <span class="m">MOHI</span>
+      <span class="fw">FOOD<i>&amp;</i>WINE</span>
+      <span class="yr">2026</span>
+    </div>
+    <div class="when"><span>Sunday, October 18</span><span>Depot Lot &middot; Morgan Hill</span></div>
+    <div class="tabs" role="tablist" aria-label="Sections">
+      <button class="tab" role="tab" id="tab-day" data-tab="day" aria-controls="day" type="button">Your Day</button>
+      <button class="tab" role="tab" id="tab-floorplan" data-tab="floorplan" aria-controls="floorplan" type="button">Floor Plan</button>
+      <button class="tab" role="tab" id="tab-guide" data-tab="guide" aria-controls="guide" type="button">Event Guide</button>
+    </div>
+  </header>
+
+  <section id="day" role="tabpanel" aria-labelledby="tab-day">
+    <div class="day">
+
+      <div class="part">
+        <div class="part-head"><h3>Setup</h3><span class="where">Depot Lot</span></div>
+        <ul>
+          <li><span class="t">9:00 AM</span><span class="what">Chefs arrive for setup<small>Check in at the registration tent</small></span></li>
+          <li><span class="t">10:00 AM</span><span class="what">Wineries arrive for setup<small>Check in at the registration tent</small></span></li>
+          <li><span class="t">11:30 AM</span><span class="what">All setup complete<small>Chefs, wineries and vendors, for both VIP and general admission</small></span></li>
+          <li><span class="t">11:30 AM</span><span class="what">Group photo<small>All chefs, volunteers and teams &middot; Main Stage</small></span></li>
+        </ul>
+      </div>
+
+      <div class="part vip">
+        <div class="part-head"><h3>VIP Hour</h3><span class="where">MOHI Farm &middot; 12:00 &ndash; 1:00 PM</span></div>
+        <p class="lede">An hour at MOHI Farm, just across 3rd Street from the main event.</p>
+        <ul>
+          <li><span class="t">11:45 AM</span><span class="what">Chefs head to MOHI Farm<small>VIP Meet &amp; Greet &middot; chefs only</small></span></li>
+          <li class="star"><span class="t">12:00 PM</span><span class="what">VIP Hour begins<small>MOHI Farm</small></span></li>
+          <li><span class="t">12:45 PM</span><span class="what">Chefs head back to the main event<small>Prepare for general admission</small></span></li>
+        </ul>
+      </div>
+
+      <div class="part">
+        <div class="part-head"><h3>Main Event</h3><span class="where">Depot Lot</span></div>
+        <ul>
+          <li><span class="t">1:00 PM</span><span class="what">Main event begins</span></li>
+          <li><span class="t">2:00 PM</span><span class="what">Welcome address<small>Chef Charlie Palmer &amp; Frank Leal &middot; Main Stage</small></span></li>
+          <li><span class="t">5:00 PM</span><span class="what">Event ends, cleanup begins</span></li>
+          <li><span class="t">6:00 PM</span><span class="what">Chef and winery tents cleaned up</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="floorplan" role="tabpanel" aria-labelledby="tab-floorplan" hidden>
+    <div class="plan-head">
+      <button class="btn alt" id="zoomBtn" type="button" aria-pressed="false">Zoom In</button>
+    </div>
+    <div class="plan" id="plan"><img src="floorplan.jpg" alt="MOHI Food and Wine 2026 floor plan along Depot Street. Chef tastings in blue, winery tastings in pink, vendors in green. Main entrance at the east end. VIP Hour is at MOHI Farm across 3rd Street." width="2000" height="1500"></div>
+    <p class="legend">Blue tents are chef tastings, pink are winery tastings, green are vendors. The main entrance is on Depot Street. VIP Hour is at MOHI Farm, across 3rd Street.</p>
+  </section>
+
+  <section id="guide" role="tabpanel" aria-labelledby="tab-guide" hidden>
+    <div class="guide-body">
+      <a class="btn" href="https://issuu.com/lealmarketing/docs/2026_event_guide_mohi_food_wine?fr=sZjBmMTkzNDA3MzU" target="_blank" rel="noopener">Open the 2026 Event Guide</a>
+    </div>
+  </section>
+</div>
+
+<script>
+(function () {
+  var tabs = Array.prototype.slice.call(document.querySelectorAll(".tab"));
+  function show(id) {
+    if (!document.getElementById(id) || !document.querySelector('[data-tab="' + id + '"]')) id = "day";
+    tabs.forEach(function (t) {
+      var on = t.getAttribute("data-tab") === id;
+      t.setAttribute("aria-selected", on ? "true" : "false");
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute("data-tab")).hidden = !on;
+    });
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener("click", function () {
+      var id = t.getAttribute("data-tab");
+      show(id);
+      try { history.replaceState(null, "", "#" + id); } catch (e) {}
+    });
+    t.addEventListener("keydown", function (e) {
+      var d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+      if (!d) return;
+      var n = tabs[(i + d + tabs.length) % tabs.length];
+      n.focus(); n.click();
+    });
+  });
+  show((location.hash || "").replace("#", ""));
+})();
+(function () {
+  var btn = document.getElementById("zoomBtn"), plan = document.getElementById("plan");
+  btn.addEventListener("click", function () {
+    var z = plan.classList.toggle("zoom");
+    btn.textContent = z ? "Fit to Screen" : "Zoom In";
+    btn.setAttribute("aria-pressed", z ? "true" : "false");
+  });
+})();
+</script>
