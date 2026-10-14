@@ -12,6 +12,7 @@
   --bronze: #8a6624;
   --gold: #c19a3b;
   --olive: #4f5b3a;
+  --hl-bg: #f6ecd0;
   --vip-bg: #1a1712;
   --vip-ink: #f6efdf;
   --vip-muted: #cdbf9f;
@@ -21,14 +22,14 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #14120e; --surface: #1d1a14; --ink: #f4efe3; --muted: #aaa08d; --line: #343025;
-    --bronze: #d6b165; --gold: #d6b165; --olive: #a3b17f;
+    --bronze: #d6b165; --gold: #d6b165; --olive: #a3b17f; --hl-bg: #2a2417;
     --vip-bg: #2a2417; --vip-ink: #f6efdf; --vip-muted: #cdbf9f;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #14120e; --surface: #1d1a14; --ink: #f4efe3; --muted: #aaa08d; --line: #343025;
-  --bronze: #d6b165; --gold: #d6b165; --olive: #a3b17f;
+  --bronze: #d6b165; --gold: #d6b165; --olive: #a3b17f; --hl-bg: #2a2417;
   --vip-bg: #2a2417; --vip-ink: #f6efdf; --vip-muted: #cdbf9f;
   color-scheme: dark;
 }
@@ -83,8 +84,13 @@ h2 { font-family: var(--font-display); font-weight: 500; font-size: clamp(34px, 
 .part.vip li { border-top-color: rgba(205,191,159,.25); }
 .part.vip small, .part.vip .lede { color: var(--vip-muted); }
 .part.vip .lede { margin: 0 0 6px; }
-.part.vip li.star .what { font-family: var(--font-display); font-size: 26px; line-height: 1.15; font-weight: 600; }
-.part.vip li.star .t { color: var(--gold); }
+/* the two start times everyone must know, boxed */
+.part li.hl { grid-template-columns: 1fr; gap: 0; border: 2px solid var(--gold); background: var(--hl-bg); padding: 16px 20px; margin-block: 10px; }
+.part li.hl:first-child { border-top: 2px solid var(--gold); }
+.hl .t { font-family: var(--font-display); font-size: 46px; line-height: 1; font-weight: 600; color: var(--bronze); }
+.hl .what { font-size: 22px; font-weight: 600; line-height: 1.25; margin-top: 4px; }
+.part.vip li.hl { --hl-bg: rgba(193,154,59,.16); }
+.part.vip .hl .t { color: var(--gold); }
 
 /* floor plan */
 .plan { background: var(--surface); border: 1px solid var(--line); overflow: auto; max-height: 82vh; }
@@ -137,7 +143,7 @@ html { scroll-behavior: smooth; }
         <p class="lede">An hour at MOHI Farm, just across 3rd Street from the main event.</p>
         <ul>
           <li><span class="t">11:45 AM</span><span class="what">Chefs head to MOHI Farm<small>VIP Meet &amp; Greet &middot; chefs only</small></span></li>
-          <li class="star"><span class="t">12:00 PM</span><span class="what">VIP Hour begins<small>MOHI Farm</small></span></li>
+          <li class="hl"><span class="t">12:00 PM</span><span class="what">VIP Hour begins<small>MOHI Farm</small></span></li>
           <li><span class="t">12:45 PM</span><span class="what">Chefs head back to the main event<small>Prepare for general admission</small></span></li>
         </ul>
       </div>
@@ -145,7 +151,7 @@ html { scroll-behavior: smooth; }
       <div class="part">
         <div class="part-head"><h3>Main Event</h3><span class="where">Depot Lot</span></div>
         <ul>
-          <li><span class="t">1:00 PM</span><span class="what">Main event begins</span></li>
+          <li class="hl"><span class="t">1:00 PM</span><span class="what">Main event begins<small>Depot Lot</small></span></li>
           <li><span class="t">2:00 PM</span><span class="what">Welcome address<small>Chef Charlie Palmer &amp; Frank Leal &middot; Main Stage</small></span></li>
           <li><span class="t">5:00 PM</span><span class="what">Event ends, cleanup begins</span></li>
           <li><span class="t">6:00 PM</span><span class="what">Chef and winery tents cleaned up</span></li>
