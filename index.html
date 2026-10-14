@@ -99,6 +99,10 @@ h2 { font-family: var(--font-display); font-weight: 500; font-size: clamp(34px, 
 .plan img { display: block; width: 100%; height: auto; max-width: none; }
 .plan.zoom img { width: 220%; }
 .legend { color: var(--muted); font-size: 15px; margin: 14px 0 0; }
+.seg { display: inline-flex; border: 1px solid var(--ink); }
+.segbtn { background: transparent; color: var(--ink); border: 0; padding: 13px 20px; font: 500 13px/1 var(--font-body); letter-spacing: .16em; text-transform: uppercase; cursor: pointer; }
+.segbtn + .segbtn { border-left: 1px solid var(--ink); }
+.segbtn[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
 .plan-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px; margin-bottom: 20px; }
 footer { text-align: center; color: var(--muted); font-family: var(--font-display); font-size: 22px; font-style: italic; border-top: 1px solid var(--line); padding-top: 32px; text-wrap: balance; }
 
@@ -165,10 +169,16 @@ html { scroll-behavior: smooth; }
 
   <section id="floorplan" role="tabpanel" aria-labelledby="tab-floorplan" hidden>
     <div class="plan-head">
+      <div class="seg" role="group" aria-label="Choose a map">
+        <button class="segbtn" id="seg-main" data-map="main" type="button" aria-pressed="true">Main Event</button>
+        <button class="segbtn" id="seg-vip" data-map="vip" type="button" aria-pressed="false">VIP Hour</button>
+      </div>
       <button class="btn alt" id="zoomBtn" type="button" aria-pressed="false">Zoom In</button>
     </div>
-    <div class="plan" id="plan"><img src="floorplan.jpg" alt="MOHI Food and Wine 2026 floor plan along Depot Street. Chef tastings in blue, winery tastings in pink, vendors in green. Main entrance at the east end. VIP Hour is at MOHI Farm across 3rd Street." width="2000" height="1500"></div>
-    <p class="legend">Blue tents are chef tastings, pink are winery tastings, green are vendors. The main entrance is on Depot Street. VIP Hour is at MOHI Farm, across 3rd Street.</p>
+    <div class="plan" id="plan">
+      <img id="map-main" src="main-event-map.jpg" alt="Main Event map along Depot Street, showing chef tastings, winery tastings, vendors, the Main Stage, restrooms and the main entrance." width="2200" height="1650">
+      <img id="map-vip" src="vip-map.jpg" alt="VIP Hour map of MOHI Farm, showing VIP check-in, the bar, tasting stations, Garden Lounge and restrooms." width="2200" height="1650" hidden>
+    </div>
   </section>
 
   <section id="guide" role="tabpanel" aria-labelledby="tab-guide" hidden>
@@ -204,6 +214,18 @@ html { scroll-behavior: smooth; }
     });
   });
   show((location.hash || "").replace("#", ""));
+})();
+(function () {
+  var segs = document.querySelectorAll(".segbtn");
+  Array.prototype.forEach.call(segs, function (b) {
+    b.addEventListener("click", function () {
+      var m = b.getAttribute("data-map");
+      Array.prototype.forEach.call(segs, function (s) { s.setAttribute("aria-pressed", s === b ? "true" : "false"); });
+      document.getElementById("map-main").hidden = m !== "main";
+      document.getElementById("map-vip").hidden = m !== "vip";
+      document.getElementById("plan").scrollTo(0, 0);
+    });
+  });
 })();
 (function () {
   var btn = document.getElementById("zoomBtn"), plan = document.getElementById("plan");
